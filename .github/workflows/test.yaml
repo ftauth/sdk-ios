@@ -9,37 +9,55 @@ on:
       - '*'
 
 jobs:
-  test-ios:
-    name: Test
+  xcode-info:
+    name: Xcode Info
     runs-on: macos-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      # - name: Install Simulators
-      #   run: |
-      #     gem install xcode-install
-      #     xcversion simulators --install='iOS 11.4'
-      #     xcversion simulators --install='iOS 12.4'
-      - name: Install Pods
-        working-directory: Example
+      - name: Print Xcode Versions
         run: |
-          pod install
-      - name: Run Unit Tests
-        working-directory: Example
-        env: 
-          scheme: FTAuth-Unit-Tests
-        run: |
-          xcodebuild -workspace Example.xcworkspace -scheme $scheme -showdestinations
-          xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
-          # xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
-          # xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
-      - name: Run Integration Tests
-        working-directory: Example
-        env:
-          scheme: Example
-        run: |
-          xcodebuild -workspace Example.xcworkspace -scheme $scheme -showdestinations
-          xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
-          # xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
-          # xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
+          ls /Applications | grep Xcode
+  # test-ios:
+  #   name: Test
+  #   runs-on: macos-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     # TODO: Possible to install old simulators without admin?
+  #     # - name: Install Simulators
+  #     #   run: |
+  #     #     gem install xcode-install
+  #     #     xcversion simulators --install='iOS 11.4'
+  #     #     xcversion simulators --install='iOS 12.4'
+  #     - name: Install Pods
+  #       working-directory: Example
+  #       run: |
+  #         pod install
+  #     - name: Run Unit Tests
+  #       working-directory: Example
+  #       env: 
+  #         scheme: FTAuth-Unit-Tests
+  #       run: |
+  #         xcodebuild -workspace Example.xcworkspace -scheme $scheme -showdestinations
+  #         xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
+  #         xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation)'
+  #     - name: Run Unit Tests (Compatibility)
+  #       working-directory: Example
+  #       env:
+  #         scheme: FTAuth-Unit-Tests
+  #       run: |
+  #         sudo xcode-select --switch /Applications/Xcode_11.7.app
+  #         xcodebuild -workspace Example.xcworkspace -scheme $scheme -showdestinations
+  #         xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X'
+  #         xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation)'
+  #     # TODO: Depends on FTAuth service
+  #     # - name: Run Integration Tests
+  #     #   working-directory: Example
+  #     #   env:
+  #     #     scheme: Example
+  #     #   run: |
+  #     #     xcodebuild -workspace Example.xcworkspace -scheme $scheme -showdestinations
+  #     #     xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
+  #     #     xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation)'
+  #     #     # xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
+  #     #     # xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
       
