@@ -21,6 +21,7 @@ jobs:
       #     xcversion simulators --install='iOS 11.4'
       #     xcversion simulators --install='iOS 12.4'
       - name: Install Pods
+        working-directory: Example
         run: |
           pod install
       - name: Run Unit Tests
