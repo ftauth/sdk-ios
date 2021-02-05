@@ -8,11 +8,6 @@ on:
     branches:
       - '*'
 
-# Versions available
-#   - Xcode 12:     Latest
-#   - Xcode 11.7:   13.7
-#   - Xcode 10.3:   12.4
-
 jobs:
   test:
     name: Test (Latest)
@@ -32,33 +27,6 @@ jobs:
           xcodebuild -workspace Example.xcworkspace -scheme $SCHEME -showdestinations
           xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
           xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation)'
-  test-compat:
-    name: Test (Compatibility)
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        xcode-version: [10.3]
-      fail-fast: false
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Xcode Versions
-        run: |
-          ls /Applications | grep Xcode
-      - name: Install Pods
-        working-directory: Example
-        run: |
-          pod install
-      - name: Run Unit Tests
-        working-directory: Example
-        env: 
-          SCHEME: FTAuth-Unit-Tests
-          XCODE_VERSION: ${{ matrix.xcode-version }}
-        run: |
-          sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
-          xcodebuild -workspace Example.xcworkspace -scheme $SCHEME -showdestinations
-          xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone X'
-          xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (3rd generation)'
       # TODO: Depends on FTAuth service
       # - name: Run Integration Tests
       #   working-directory: Example
