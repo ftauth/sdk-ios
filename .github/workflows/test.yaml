@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install Simulators
-        run: |
-          gem install xcode-install
-          xcversion simulators --install='iOS 11.4'
-          xcversion simulators --install='iOS 12.4'
+      # - name: Install Simulators
+      #   run: |
+      #     gem install xcode-install
+      #     xcversion simulators --install='iOS 11.4'
+      #     xcversion simulators --install='iOS 12.4'
       - name: Install Pods
         run: |
           pod install
@@ -30,8 +30,8 @@ jobs:
         run: |
           xcodebuild -workspace Example.xcworkspace -scheme $scheme -showdestinations
           xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
-          xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
-          xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
+          # xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
+          # xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
       - name: Run Integration Tests
         working-directory: Example
         env:
@@ -39,6 +39,6 @@ jobs:
         run: |
           xcodebuild -workspace Example.xcworkspace -scheme $scheme -showdestinations
           xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
-          xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
-          xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
+          # xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
+          # xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
       
