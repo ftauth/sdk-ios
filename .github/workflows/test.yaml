@@ -16,12 +16,22 @@ jobs:
       - name: Print Xcode Versions
         run: |
           ls /Applications | grep Xcode
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Pods
+        run: |
+          pod install
+      - name: Get Build Desc
+        working-directory: Example
+        run: |
+          xcodebuild -workspace Example.xcworkspace -scheme FTAuth-Unit-Tests -showdestinations
+          xcodebuild -workspace Example.xcworkspace -scheme Example -showdestinations
   # test-ios:
   #   name: Test
   #   runs-on: macos-latest
   #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
+      # - name: Checkout
+      #   uses: actions/checkout@v2
   #     # TODO: Possible to install old simulators without admin?
   #     # - name: Install Simulators
   #     #   run: |
