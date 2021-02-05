@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Run FTAuth
-        run: |
-          docker run --rm -dp 8080:8080 -e FTAUTH_SERVER_PORT=8080 \ 
-            -e FTAUTH_OAUTH_ADMIN_CLIENTID="3cf9a7ac-9198-469e-92a7-cc2f15d8b87d" \
-            ftauth/ftauth:latest
+      # - name: Run FTAuth
+      #   run: |
+      #     docker run --rm -dp 8080:8080 -e FTAUTH_SERVER_PORT=8080 \ 
+      #       -e FTAUTH_OAUTH_ADMIN_CLIENTID="3cf9a7ac-9198-469e-92a7-cc2f15d8b87d" \
+      #       ftauth/ftauth:latest
       - name: Install Pods
         working-directory: Example
         run: |
@@ -39,14 +39,14 @@ jobs:
           xcodebuild -workspace Example.xcworkspace -scheme $SCHEME -showdestinations
           xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
           xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation)'
-      - name: Run Integration Tests
-        working-directory: Example
-        env:
-          SCHEME: Example
-        run: |
-          xcodebuild -workspace Example.xcworkspace -scheme $SCHEME -showdestinations
-          xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
-          xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation)'
-          # xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
-          # xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
+      # - name: Run Integration Tests
+      #   working-directory: Example
+      #   env:
+      #     SCHEME: Example
+      #   run: |
+      #     xcodebuild -workspace Example.xcworkspace -scheme $SCHEME -showdestinations
+      #     xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
+      #     xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation)'
+      #     # xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
+      #     # xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
       
