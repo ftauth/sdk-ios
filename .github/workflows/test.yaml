@@ -39,6 +39,12 @@ jobs:
           xcodebuild -workspace Example.xcworkspace -scheme $SCHEME -showdestinations
           xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
           xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation)'
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+          verbose: true
       # - name: Run Integration Tests
       #   working-directory: Example
       #   env:
