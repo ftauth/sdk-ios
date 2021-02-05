@@ -1,20 +1,24 @@
-# name: Test
+name: Test
 
-# on:
-#   push:
-#     branches:
-#       - '*'
-#   pull_request:
-#     branches:
-#       - '*'
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
 
-# jobs:
-#   test-ios:
-#     name: Test iOS
-#     runs-on: macos-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
+jobs:
+  test-ios:
+    name: Test iOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Unit Tests
+        working-directory: Example
+        run: |
+          xcodebuild -workspace Example.xcworkspace -scheme Example -showdestinations
 #       - name: Run Unit Tests
 #         working-directory: ios
 #         env:
