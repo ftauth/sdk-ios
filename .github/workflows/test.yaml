@@ -1,0 +1,31 @@
+# name: Test
+
+# on:
+#   push:
+#     branches:
+#       - '*'
+#   pull_request:
+#     branches:
+#       - '*'
+
+# jobs:
+#   test-ios:
+#     name: Test iOS
+#     runs-on: macos-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Run Unit Tests
+#         working-directory: ios
+#         env:
+#           scheme: FTAuth-Unit-Tests
+#         run: |
+#           xcodebuild build -test
+#       - name: Run UI Tests
+#         working-directory: ios/Example
+#         env:
+#           scheme: Example
+#         run: |
+#           xcodebuild test -workspace Example.xcworkspace -scheme Example -destination 'platform=iOS Simulator,name=iPhone 12,OS=latest'
+#           xcodebuild test -workspace Example.xcworkspace -scheme Example -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
+#           xcodebuild test -workspace Example.xcworkspace -scheme Example -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
