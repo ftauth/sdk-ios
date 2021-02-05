@@ -19,6 +19,7 @@ jobs:
         working-directory: Example
         run: |
           xcodebuild -workspace Example.xcworkspace -scheme Example -showdestinations
+          xcodebuild test -workspace Example.xcworkspace -scheme Example -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
 #       - name: Run Unit Tests
 #         working-directory: ios
 #         env:
