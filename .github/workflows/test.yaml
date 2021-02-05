@@ -24,6 +24,7 @@ jobs:
       - name: Get Build Desc
         working-directory: Example
         run: |
+          sudo xcode-select --switch /Applications/Xcode_11.7.app
           xcodebuild -workspace Example.xcworkspace -scheme FTAuth-Unit-Tests -showdestinations
           xcodebuild -workspace Example.xcworkspace -scheme Example -showdestinations
   # test-ios:
