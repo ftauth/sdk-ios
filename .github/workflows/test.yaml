@@ -15,15 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install Pods
-        working-directory: Example
-        run: |
-          pod install
-      - name: Install Simulators
-        run: |
-          gem install xcode-install
-          sudo xcversion simulators --install='iOS 11.4'
-          sudo xcversion simulators --install='iOS 12.4'
       - name: Run Unit Tests
         working-directory: Example
         env: 
@@ -32,8 +23,6 @@ jobs:
           xcodebuild -workspace Example.xcworkspace -scheme $SCHEME -showdestinations
           xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max'
           xcodebuild test -workspace Example.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation)'
-          xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=12.4'
-          xcodebuild test -workspace Example.xcworkspace -scheme $scheme -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
       # TODO: Depends on FTAuth service
       # - name: Run Integration Tests
       #   working-directory: Example
