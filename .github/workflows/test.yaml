@@ -8,6 +8,11 @@ on:
     branches:
       - '*'
 
+# Versions available
+#   - Xcode 12:     Latest
+#   - Xcode 11.7:   13.7
+#   - Xcode 10.3:
+
 jobs:
   xcode-info:
     name: Xcode Info
@@ -25,7 +30,7 @@ jobs:
       - name: Get Build Desc
         working-directory: Example
         run: |
-          sudo xcode-select --switch /Applications/Xcode_11.7.app
+          sudo xcode-select --switch /Applications/Xcode_10.3.app
           xcodebuild -workspace Example.xcworkspace -scheme FTAuth-Unit-Tests -showdestinations
           xcodebuild -workspace Example.xcworkspace -scheme Example -showdestinations
   # test-ios:
