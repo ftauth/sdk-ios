@@ -27,7 +27,7 @@ extension SignInWithApple {
                 case .password:
                     internalSignInData = FtauthinternalNewSignInWithApplePasswordData(user.username, user.password)
                 case .appleID:
-                    internalSignInData = FtauthinternalNewSignInWithAppleIDData(user.userID, user.scopes?.joined(separator: ","), user.idToken, user.email, user.firstName, user.lastName, user.realUserStatus ?? 0)
+                    internalSignInData = FtauthinternalNewSignInWithAppleIDData(user.userID, user.authCode, user.scopes?.joined(separator: ","), user.idToken, user.email, user.firstName, user.lastName, user.realUserStatus ?? 0)
                 }
                 let internalUserData = try handler.signIn(withApple: internalSignInData)
                 let userData = User(ID: internalUserData.id_, username: internalUserData.username, firstName: internalUserData.firstName, lastName: internalUserData.lastName, email: internalUserData.email, phoneNumber: internalUserData.phoneNumber, provider: internalUserData.provider)

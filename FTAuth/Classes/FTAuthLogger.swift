@@ -8,13 +8,8 @@
 import Foundation
 import FTAuthInternal
 
-class FTAuthLogger: NSObject, FtauthinternalLoggerProtocol {
-    func write(_ p0: Data?, n: UnsafeMutablePointer<Int>?) throws {
-        if let size = p0?.count {
-            n?.initialize(to: size)
-        }
-        if let data = p0 {
-            print(String(data: data, encoding: .utf8) ?? "Invalid log")
-        }
-    }
-}
+/// Defines an interface for logging within the FTAuth library. Users should implement this
+/// to define custom logging behavior within the library. By default, all logs are printed to stdout.
+@objc public protocol FTAuthLogger: FtauthinternalLoggerProtocol {}
+
+extension DefaultLogger: FTAuthLogger {}

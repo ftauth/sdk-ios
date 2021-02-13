@@ -1,5 +1,7 @@
 import FTAuthInternal
 
+internal var logger: FTAuthLogger = DefaultLogger()
+
 public class FTAuthClient: NSObject {
     @objc public static let shared = FTAuthClient()
     private var internalClient: FtauthinternalClient?
@@ -10,11 +12,15 @@ public class FTAuthClient: NSObject {
         internalClient != nil
     }
     
-    @objc public func initialize(withJSON configJSON: Data) throws {
+    @objc public func initialize(withJSON configJSON: Data, logger logger_: FTAuthLogger? = nil) throws {
         try keystore.clear()
         
+        if let logger_ = logger_ {
+            logger = logger_
+        }
+        
         var optionsErr: NSError?
-        let options = FtauthinternalNewClientOptions(keystore, FTAuthLogger(), configJSON, &optionsErr)
+        let options = FtauthinternalNewClientOptions(keystore, logger, configJSON, &optionsErr)
         if let optionsErr = optionsErr {
             throw FTAuthError(errorCode: .couldNotInitialize, details: optionsErr.localizedDescription)
         }
@@ -31,24 +37,32 @@ public class FTAuthClient: NSObject {
         self.internalClient = internalClient
     }
     
-    @objc public func initialize(withConfig config: FTAuthConfig) throws {
+    @objc public func initialize(withConfig config: FTAuthConfig, logger: FTAuthLogger? = nil) throws {
         let json = try JSONEncoder().encode(config)
-        return try initialize(withJSON: json)
+        return try initialize(withJSON: json, logger: logger)
     }
     
-    @objc public func initialize(withURL url: URL) throws {
+    @objc public func initialize(withURL url: URL, logger: FTAuthLogger? = nil) throws {
         let configJSON = try Data(contentsOf: url)
-        return try initialize(withJSON: configJSON)
+        return try initialize(withJSON: configJSON, logger: logger)
     }
     
-    @objc public func initialize() throws {
+    @objc public func initialize(logger: FTAuthLogger? = nil) throws {
         guard let url = Bundle.main.url(forResource: "ftauth_config.json", withExtension: nil) else {
             throw FTAuthError(errorCode: .couldNotInitialize, details: "Could not find configuration file: ftauth_config.json")
         }
-        return try initialize(withURL: url)
+        return try initialize(withURL: url, logger: logger)
     }
     
-    @objc public func login(provider: Provider = .ftauth, completion: AuthenticationCompletionHandler? = nil) {
+    /// Launches a WebView for authenticating the user and returns a [User] object on success, or an [Error] on failure.
+    ///
+    /// Shorthand for `login(provider: Provider.ftauth, completion: completion)`.
+    @objc public func login(completion: AuthenticationCompletionHandler? = nil) {
+        return login(provider: .ftauth, completion: completion)
+    }
+    
+    /// Launches a WebView for authenticating the user and returns a [User] object on success, or an [Error] on failure.
+    @objc public func login(provider: Provider, completion: AuthenticationCompletionHandler? = nil) {
         guard let internalClient = internalClient else {
             completion?(nil, FTAuthError(errorCode: .uninitialized))
             return

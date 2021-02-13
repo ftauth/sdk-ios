@@ -25,10 +25,10 @@ class TestSecurityConfiguration: XCTestCase {
         var defaultConfig = client.getDefaultSecurityConfiguration()
         XCTAssert(defaultConfig.trustPublicPKI == true)
         
-        let secConf = SecurityConfiguration(host: "", trustSystemRoots: false)
+        let secConf = SecurityConfiguration(host: "myapp.ftauth.dev", trustPublicPKI: false)
         client.setDefaultSecurityConfiguration(secConf)
         defaultConfig = client.getDefaultSecurityConfiguration()
-        XCTAssert(defaultConfig.trustPublicPKI == false)
+        XCTAssert(defaultConfig == secConf)
     }
 
 }

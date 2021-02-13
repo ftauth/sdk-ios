@@ -51,7 +51,10 @@
 @end
 
 @protocol FtauthinternalLogger <NSObject>
-- (BOOL)write:(NSData* _Nullable)p0 n:(long* _Nullable)n error:(NSError* _Nullable* _Nullable)error;
+- (void)debug:(NSString* _Nullable)log;
+- (void)error:(NSString* _Nullable)log;
+- (void)info:(NSString* _Nullable)log;
+- (void)warn:(NSString* _Nullable)log;
 @end
 
 @protocol FtauthinternalLoginCompleter <NSObject>
@@ -126,7 +129,7 @@ used when a server's configuration has not been explicitly set.
  * Client communicates with HTTP services on behalf
 of an authenticated user.
  */
-@interface FtauthinternalClient : NSObject <goSeqRefInterface, FtauthinternalAuthorizationCodeCompleter, FtauthinternalSignInWithApple> {
+@interface FtauthinternalClient : NSObject <goSeqRefInterface, FtauthinternalAuthorizationCodeCompleter, FtauthinternalLogger, FtauthinternalSignInWithApple> {
 }
 @property(strong, readonly) _Nonnull id _ref;
 
@@ -137,20 +140,34 @@ of an authenticated user.
 - (nullable instancetype)init:(FtauthinternalConfig* _Nullable)config;
 // skipped field Client.Client with unsupported type: *github.com/ftauth/sdk-go.Client
 
-/**
- * Authorize returns a URL through which the user must authenticate. The client is responsible for listening to redirect steps and
-capturing the query parameters for use with Exchange.
- */
-- (NSString* _Nonnull)authorize:(NSError* _Nullable* _Nullable)error;
+// skipped method Client.Authorize with unsupported parameter or return types
+
 /**
  * Complete handles completion of an authorization code request.
  */
 - (void)complete:(FtauthinternalAuthorizationCodeResponse* _Nullable)authResp err:(NSError* _Nullable)err;
+// skipped method Client.Configure with unsupported parameter or return types
+
 // skipped method Client.CurrentUser with unsupported parameter or return types
+
+- (void)debug:(NSString* _Nullable)log;
+// skipped method Client.Debugf with unsupported parameter or return types
+
+// skipped method Client.Debugln with unsupported parameter or return types
 
 // skipped method Client.DefaultAuthorizer with unsupported parameter or return types
 
+- (void)error:(NSString* _Nullable)log;
+// skipped method Client.Errorf with unsupported parameter or return types
+
+// skipped method Client.Errorln with unsupported parameter or return types
+
 // skipped method Client.Exchange with unsupported parameter or return types
+
+- (void)info:(NSString* _Nullable)log;
+// skipped method Client.Infof with unsupported parameter or return types
+
+// skipped method Client.Infoln with unsupported parameter or return types
 
 - (BOOL)initialize:(NSError* _Nullable* _Nullable)error;
 - (BOOL)isAuthenticated;
@@ -179,6 +196,11 @@ iOS 12 and all other providers use the Login function with the provider specifie
 // skipped method Client.Token with unsupported parameter or return types
 
 - (void)unlock;
+- (void)warn:(NSString* _Nullable)log;
+// skipped method Client.Warnf with unsupported parameter or return types
+
+// skipped method Client.Warnln with unsupported parameter or return types
+
 @end
 
 /**
@@ -192,6 +214,8 @@ Use DefaultOptions if unsure.
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
 - (nonnull instancetype)init;
 // skipped field Config.KeyStore with unsupported type: github.com/ftauth/sdk-go.KeyStore
+
+// skipped field Config.Logger with unsupported type: *github.com/ftauth/sdk-go.LoggerImpl
 
 // skipped field Config.ClientConfig with unsupported type: *github.com/ftauth/sdk-go.ClientConfig
 
@@ -279,6 +303,7 @@ after a successful login call, broken out by credential type.
  * AppleCredentialTypeAppleID
  */
 @property (nonatomic) NSString* _Nonnull userID;
+@property (nonatomic) NSData* _Nullable authCode;
 // skipped field SignInWithAppleData.Scopes with unsupported type: []string
 
 @property (nonatomic) NSData* _Nullable idToken;
@@ -382,7 +407,7 @@ FOUNDATION_EXPORT FtauthinternalSecurityConfiguration* _Nullable FtauthinternalN
 /**
  * NewSignInWithAppleIDData returns a data object for the Apple ID flow.
  */
-FOUNDATION_EXPORT FtauthinternalSignInWithAppleData* _Nullable FtauthinternalNewSignInWithAppleIDData(NSString* _Nullable UserID, NSString* _Nullable Scopes, NSData* _Nullable IDToken, NSString* _Nullable Email, NSString* _Nullable FirstName, NSString* _Nullable LastName, long RealUserStatus);
+FOUNDATION_EXPORT FtauthinternalSignInWithAppleData* _Nullable FtauthinternalNewSignInWithAppleIDData(NSString* _Nullable UserID, NSData* _Nullable AuthCode, NSString* _Nullable Scopes, NSData* _Nullable IDToken, NSString* _Nullable Email, NSString* _Nullable FirstName, NSString* _Nullable LastName, long RealUserStatus);
 
 /**
  * NewSignInWithApplePasswordData returns a data object for the password flow.
@@ -443,14 +468,17 @@ or reasonably protected against attacks.
 @end
 
 /**
- * Logger allows printing logs in the mobile world.
+ * Logger lets the mobile platform define the logging interface.
  */
 @interface FtauthinternalLogger : NSObject <goSeqRefInterface, FtauthinternalLogger> {
 }
 @property(strong, readonly) _Nonnull id _ref;
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (BOOL)write:(NSData* _Nullable)p0 n:(long* _Nullable)n error:(NSError* _Nullable* _Nullable)error;
+- (void)debug:(NSString* _Nullable)log;
+- (void)error:(NSString* _Nullable)log;
+- (void)info:(NSString* _Nullable)log;
+- (void)warn:(NSString* _Nullable)log;
 @end
 
 /**
