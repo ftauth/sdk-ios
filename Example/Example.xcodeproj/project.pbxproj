@@ -19,6 +19,7 @@
 		C04EF94A25CD8C330063785A /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04EF94925CD8C330063785A /* ExampleUITests.swift */; };
 		C04EF98325CD952B0063785A /* ftauth_config.json in Resources */ = {isa = PBXBuildFile; fileRef = C04EF98225CD952B0063785A /* ftauth_config.json */; };
 		C04EF98B25CD95740063785A /* Example.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = C04EF98A25CD95740063785A /* Example.xctestplan */; };
+		C079360525CE15EF0034ED03 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079360425CE15EF0034ED03 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		C04EF94B25CD8C330063785A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C04EF98225CD952B0063785A /* ftauth_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ftauth_config.json; sourceTree = "<group>"; };
 		C04EF98A25CD95740063785A /* Example.xctestplan */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Example.xctestplan; sourceTree = "<group>"; };
+		C079360425CE15EF0034ED03 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		C0D0160F25D351B600C33747 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		C1E591B9BA58734FF5A658D3 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C648BE49C1AA278983488FBB /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D856242EF1F9AC2686D18A /* Pods_ExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +144,7 @@
 		C04EF92625CD8C310063785A /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				C0D0160F25D351B600C33747 /* Example.entitlements */,
 				C04EF98225CD952B0063785A /* ftauth_config.json */,
 				C04EF92725CD8C310063785A /* AppDelegate.swift */,
 				C04EF92B25CD8C310063785A /* ViewController.swift */,
@@ -148,6 +152,7 @@
 				C04EF93025CD8C330063785A /* Assets.xcassets */,
 				C04EF93225CD8C330063785A /* LaunchScreen.storyboard */,
 				C04EF93525CD8C330063785A /* Info.plist */,
+				C079360425CE15EF0034ED03 /* LoginViewModel.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -413,6 +418,7 @@
 			files = (
 				C04EF92C25CD8C310063785A /* ViewController.swift in Sources */,
 				C04EF92825CD8C310063785A /* AppDelegate.swift in Sources */,
+				C079360525CE15EF0034ED03 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,15 +595,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WWUCR9U4P8;
+				DEVELOPMENT_TEAM = 6NFV336UD2;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.ftauth.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = io.ftauth.iosexample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -610,15 +617,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WWUCR9U4P8;
+				DEVELOPMENT_TEAM = 6NFV336UD2;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.ftauth.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = io.ftauth.iosexample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -685,6 +693,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.ftauth.ExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

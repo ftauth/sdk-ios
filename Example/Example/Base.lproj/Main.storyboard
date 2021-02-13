@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -23,14 +24,22 @@
                                     <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y0w-5k-a9o"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mS6-Ev-c1Y">
+                                <rect key="frame" x="152" y="476" width="110" height="200"/>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="mS6-Ev-c1Y" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="MDd-cI-DE2"/>
                             <constraint firstItem="s9X-MP-fUK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="PyT-pO-Fw9"/>
+                            <constraint firstItem="mS6-Ev-c1Y" firstAttribute="top" secondItem="s9X-MP-fUK" secondAttribute="bottom" constant="8" symbolic="YES" id="RnO-FZ-fTH"/>
                             <constraint firstItem="s9X-MP-fUK" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="vnz-pO-Yhp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginProviderStackView" destination="mS6-Ev-c1Y" id="XzO-iC-eyS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

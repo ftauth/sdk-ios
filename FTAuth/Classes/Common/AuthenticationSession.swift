@@ -41,7 +41,7 @@ func processParameters(_ callbackURL: URL?) -> ([String: String]?, Error?) {
 
 @available(iOS 12.0, macOS 10.15, macCatalyst 13.0, watchOS 6.2, *)
 public class AuthenticationSession: NSObject, WebViewLauncher {
-    // Retains a reference to the view controller on iOS 12
+    // Strong reference for iOS 12 (see session.start)
     private var session: ASWebAuthenticationSession?
     
     public func launchURL(_ url: String?, completion: @escaping ([String: String]?, Error?) -> Void) {
@@ -50,8 +50,9 @@ public class AuthenticationSession: NSObject, WebViewLauncher {
             return
         }
         session = ASWebAuthenticationSession(url: uri, callbackURLScheme: "myapp") { callbackURL, error in
-            if let error = error {
-                completion(nil, error)
+            if error != nil {
+                // Will only return error if cancelled.
+                completion(nil, AuthenticationError.cancelled)
                 return
             }
             let (queryParams, error) = processParameters(callbackURL)
@@ -105,8 +106,9 @@ public class AuthenticationSessionCompat: NSObject, WebViewLauncher {
             return
         }
         session = SFAuthenticationSession(url: uri, callbackURLScheme: "myapp") { callbackURL, error in
-            if let error = error {
-                completion(nil, error)
+            if error != nil {
+                // Will only return error if cancelled.
+                completion(nil, AuthenticationError.cancelled)
                 return
             }
             let (queryParams, error) = processParameters(callbackURL)

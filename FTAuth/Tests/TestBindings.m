@@ -18,6 +18,7 @@
     XCTAssert(true);
     return;
     
+    // FTAuthClient
     FTAuthClient *client = [FTAuthClient shared];
     
     NSError *error;
@@ -25,12 +26,23 @@
     [client loginWithCompletion:^(User * _Nullable user, NSError * _Nullable error) {}];
     [client logout];
     
+    // Keystore
     Keystore *keystore = [[Keystore alloc] init];
     NSData *value = [keystore get:nil error:&error];
-    NSLog(@"Received value: %@", value); // silence warning
     [keystore save:nil value:nil error:&error];
     [keystore delete:nil error:&error];
     [keystore clear:&error];
+    
+    // SecurityConfiguration
+    SecurityConfiguration* secConf = [[SecurityConfiguration alloc] initWithHost:@"" trustSystemRoots:NO];
+    [secConf addIntermediatePEMWithData:nil error:&error];
+    [secConf addIntermediateASN1WithData:nil error:&error];
+    SecurityConfiguration *defaultConf = [client getDefaultSecurityConfiguration];
+    [client setDefaultSecurityConfiguration:defaultConf];
+    
+    // FTAuthConfig
+    FTAuthConfig *config = [[FTAuthConfig alloc] initWithGatewayURL:@"" clientID:@"" clientSecret:@"" clientType:@"" redirectURI:@"" scopes:@[] timeout:30];
+    [client initializeWithConfig:config error:&error];
 }
 
 @end

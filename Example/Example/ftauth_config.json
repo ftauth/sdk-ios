@@ -1,5 +1,5 @@
 {
-    "gateway_url": "https://092f5bd2304e.ngrok.io",
+    "gateway_url": "https://b6442c9ef6e1.ngrok.io",
     "client_id": "3cf9a7ac-9198-469e-92a7-cc2f15d8b87d",
     "client_type": "public",
     "redirect_uri": "myapp://auth",
