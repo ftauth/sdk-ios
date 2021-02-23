@@ -33,12 +33,12 @@
 @implementation TestBindings
 
 - (void)testBindings {
-    XCTAssert(true);
-    return;
-    
     // FTAuthLogger
     MyLogger *logger = [[MyLogger alloc] init];
     XCTAssert([logger conformsToProtocol:@protocol(FTAuthLogger)]);
+    
+    XCTAssert(true);
+    return;
     
     // FTAuthConfig
     FTAuthConfig *config = [[FTAuthConfig alloc] initWithGatewayURL:@"" clientID:@"" clientSecret:@"" clientType:@"" redirectURI:@"" scopes:@[] timeout:30];
