@@ -14,6 +14,7 @@
 @class FtauthinternalAuthorizationCodeResponse;
 @class FtauthinternalCertificateRepository;
 @class FtauthinternalClient;
+@class FtauthinternalClientConfig;
 @class FtauthinternalConfig;
 @class FtauthinternalRequest;
 @class FtauthinternalResponse;
@@ -204,6 +205,31 @@ iOS 12 and all other providers use the Login function with the provider specifie
 @end
 
 /**
+ * ClientConfig holds client options and settings.
+ */
+@interface FtauthinternalClientConfig : NSObject <goSeqRefInterface> {
+}
+@property(strong, readonly) _Nonnull id _ref;
+
+- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
+/**
+ * NewClientConfig creates a new object holding all the information
+needed to initialize an FTAuth client.
+ */
+- (nullable instancetype)init:(NSString* _Nullable)gatewayURL clientID:(NSString* _Nullable)clientID clientSecret:(NSString* _Nullable)clientSecret clientType:(NSString* _Nullable)clientType redirectURI:(NSString* _Nullable)redirectURI scope:(NSString* _Nullable)scope timeout:(long)timeout;
+@property (nonatomic) NSString* _Nonnull gatewayURL;
+@property (nonatomic) NSString* _Nonnull clientID;
+@property (nonatomic) NSString* _Nonnull clientSecret;
+// skipped field ClientConfig.ClientType with unsupported type: github.com/ftauth/ftauth/pkg/model.ClientType
+
+@property (nonatomic) NSString* _Nonnull redirectURI;
+// skipped field ClientConfig.Scopes with unsupported type: []string
+
+// skipped field ClientConfig.Timeout with unsupported type: uint
+
+@end
+
+/**
  * Config holds options for configuring the client.
 Use DefaultOptions if unsure.
  */
@@ -212,13 +238,26 @@ Use DefaultOptions if unsure.
 @property(strong, readonly) _Nonnull id _ref;
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (nonnull instancetype)init;
+/**
+ * NewConfig creates an options object for configuring
+an FTAuth client.
+ */
+- (nullable instancetype)init:(id<FtauthinternalKeyStore> _Nullable)keyStore logger:(id<FtauthinternalLogger> _Nullable)logger clientConfig:(FtauthinternalClientConfig* _Nullable)clientConfig;
+/**
+ * NewConfigWithJSON creates an options object for configuring
+an FTAuth client with client config in JSON format.
+ */
+- (nullable instancetype)initWithJSON:(id<FtauthinternalKeyStore> _Nullable)keyStore logger:(id<FtauthinternalLogger> _Nullable)logger clientConfigJSON:(NSData* _Nullable)clientConfigJSON;
 // skipped field Config.KeyStore with unsupported type: github.com/ftauth/sdk-go.KeyStore
 
 // skipped field Config.Logger with unsupported type: *github.com/ftauth/sdk-go.LoggerImpl
 
 // skipped field Config.ClientConfig with unsupported type: *github.com/ftauth/sdk-go.ClientConfig
 
+/**
+ * GetClientConfig returns the configured client options.
+ */
+- (FtauthinternalClientConfig* _Nullable)getClientConfig;
 @end
 
 /**
@@ -388,10 +427,22 @@ FOUNDATION_EXPORT FtauthinternalAuthorizationCodeResponse* _Nullable Ftauthinter
 FOUNDATION_EXPORT FtauthinternalClient* _Nullable FtauthinternalNewClient(FtauthinternalConfig* _Nullable config, NSError* _Nullable* _Nullable error);
 
 /**
- * NewClientOptions creates an options object for configuring
+ * NewClientConfig creates a new object holding all the information
+needed to initialize an FTAuth client.
+ */
+FOUNDATION_EXPORT FtauthinternalClientConfig* _Nullable FtauthinternalNewClientConfig(NSString* _Nullable gatewayURL, NSString* _Nullable clientID, NSString* _Nullable clientSecret, NSString* _Nullable clientType, NSString* _Nullable redirectURI, NSString* _Nullable scope, long timeout, NSError* _Nullable* _Nullable error);
+
+/**
+ * NewConfig creates an options object for configuring
 an FTAuth client.
  */
-FOUNDATION_EXPORT FtauthinternalConfig* _Nullable FtauthinternalNewClientOptions(id<FtauthinternalKeyStore> _Nullable keyStore, id<FtauthinternalLogger> _Nullable logger, NSData* _Nullable clientConfigJSON, NSError* _Nullable* _Nullable error);
+FOUNDATION_EXPORT FtauthinternalConfig* _Nullable FtauthinternalNewConfig(id<FtauthinternalKeyStore> _Nullable keyStore, id<FtauthinternalLogger> _Nullable logger, FtauthinternalClientConfig* _Nullable clientConfig, NSError* _Nullable* _Nullable error);
+
+/**
+ * NewConfigWithJSON creates an options object for configuring
+an FTAuth client with client config in JSON format.
+ */
+FOUNDATION_EXPORT FtauthinternalConfig* _Nullable FtauthinternalNewConfigWithJSON(id<FtauthinternalKeyStore> _Nullable keyStore, id<FtauthinternalLogger> _Nullable logger, NSData* _Nullable clientConfigJSON, NSError* _Nullable* _Nullable error);
 
 /**
  * NewRequest creates a new HTTP request

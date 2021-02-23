@@ -20,7 +20,7 @@ public class FTAuthClient: NSObject {
         }
         
         var optionsErr: NSError?
-        let options = FtauthinternalNewClientOptions(keystore, logger, configJSON, &optionsErr)
+        let options = FtauthinternalNewConfigWithJSON(keystore, logger, configJSON, &optionsErr)
         if let optionsErr = optionsErr {
             throw FTAuthError(errorCode: .couldNotInitialize, details: optionsErr.localizedDescription)
         }
