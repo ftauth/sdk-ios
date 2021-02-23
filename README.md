@@ -20,10 +20,6 @@ it, simply add the following line to your Podfile:
 pod 'FTAuth'
 ```
 
-## Author
-
-24740863, dnys1@asu.edu
-
 ## License
 
-FTAuth is available under the MIT license. See the LICENSE file for more info.
+FTAuth is available under the Apache 2.0 license. See the LICENSE file for more info.
