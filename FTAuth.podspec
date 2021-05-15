@@ -25,18 +25,18 @@ Client-side library for the FTAuth server. Handles authentication and HTTP reque
   s.swift_versions = ['5.0', '5.1', '5.2', '5.3']
 
   s.subspec 'Common' do |cs|
-    cs.source_files = 'FTAuth/Classes/Common/**/*'
+    cs.source_files = 'Sources/FTAuth/Common/**/*'
   end
 
   s.subspec 'Full' do |fs|
-    fs.source_files = 'FTAuth/Classes/**/*'
-    fs.vendored_frameworks = 'FTAuthInternal.framework'
+    fs.source_files = 'Sources/FTAuth/**/*'
+    fs.vendored_frameworks = 'FTAuthInternal.xcframework'
   end
 
   s.test_spec 'Tests' do |test_spec|
     # Keychain access requires an app host
     test_spec.requires_app_host = true
-    test_spec.source_files = 'FTAuth/Tests/**/*'
+    test_spec.source_files = 'Tests/**/*'
   end
 
   s.default_subspec = 'Full'

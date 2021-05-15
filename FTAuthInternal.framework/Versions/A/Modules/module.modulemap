@@ -1,8 +1,0 @@
-framework module "FTAuthInternal" {
-	header "ref.h"
-    header "Ftauthinternal.objc.h"
-    header "Universe.objc.h"
-    header "FTAuthInternal.h"
-
-    export *
-}
