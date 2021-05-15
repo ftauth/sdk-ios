@@ -14,9 +14,9 @@
         "package": "FTAuth",
         "repositoryURL": "https://github.com/ftauth/sdk-ios.git",
         "state": {
-          "branch": null,
-          "revision": "64be2af4245458db5bb5605ebc70851a2da1cec8",
-          "version": "0.0.4"
+          "branch": "main",
+          "revision": "8d0ddc40267ecdc647a233a83b01d967ae584ac0",
+          "version": null
         }
       }
     ]

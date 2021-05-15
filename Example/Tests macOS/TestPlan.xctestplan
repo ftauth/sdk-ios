@@ -1,0 +1,43 @@
+{
+  "configurations" : [
+    {
+      "id" : "E3F459EC-4575-4200-BAA2-A96B5E593233",
+      "name" : "Standard",
+      "options" : {
+
+      }
+    },
+    {
+      "id" : "4F80C293-D778-4D23-8C67-2C14BDC4ED9C",
+      "name" : "ASan",
+      "options" : {
+        "addressSanitizer" : {
+          "enabled" : true
+        },
+        "threadSanitizerEnabled" : false,
+        "undefinedBehaviorSanitizerEnabled" : true
+      }
+    },
+    {
+      "id" : "3BE0094F-1A60-481B-9BD5-E931411E38FA",
+      "name" : "TSan",
+      "options" : {
+        "threadSanitizerEnabled" : true,
+        "undefinedBehaviorSanitizerEnabled" : true
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Example.xcodeproj",
+        "identifier" : "C02FE62A26503EE30031B659",
+        "name" : "Tests macOS"
+      }
+    }
+  ],
+  "version" : 1
+}
