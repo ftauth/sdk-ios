@@ -7,7 +7,9 @@
 
 import Foundation
 import AuthenticationServices
+#if canImport(Combine)
 import Combine
+#endif
 import SafariServices
 
 public typealias AuthenticationCompletionHandler = (User?, Error?) -> Void
@@ -71,6 +73,7 @@ public class AuthenticationSession: NSObject, WebViewLauncher {
         }
     }
     
+    #if canImport(Combine)
     @available(iOS 13.0, *)
     public func launchURL(_ url: String) -> Future<[String: String], Error> {
         return Future<[String: String], Error> { promise in
@@ -83,6 +86,7 @@ public class AuthenticationSession: NSObject, WebViewLauncher {
             }
         }
     }
+    #endif
 }
 
 @available(iOS 13.0, macOS 10.15, macCatalyst 13.0, *)
