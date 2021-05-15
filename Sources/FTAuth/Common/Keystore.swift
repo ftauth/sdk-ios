@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import KeychainAccess
 
 public class Keystore: NSObject {
-    private let service: Data = "ftauth".data(using: .utf8)!
+    private let keychain = Keychain(service: "io.ftauth")
     
     public enum KeystoreError: Error {
         case keyNotFound(_ key: String? = nil)
@@ -20,119 +21,54 @@ public class Keystore: NSObject {
         return keyStoreError
     }
     
-    func details(for status: OSStatus) -> String? {
-        var details: String? = ""
-        if #available(iOS 11.3, *) {
-            details = SecCopyErrorMessageString(status, nil) as String?
-        }
-        return details
-    }
-    
-    @objc public func get(_ key: Data?) throws -> Data {
+    @objc public func get(_ key: String?) throws -> Data {
         guard let key = key else {
             throw errorFor(KeystoreError.keyNotFound())
         }
         
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: service,
-            kSecReturnAttributes as String: kCFBooleanTrue!,
-            kSecReturnData as String: kCFBooleanTrue!,
-            kSecMatchLimit as String: kSecMatchLimitOne,
-            kSecAttrAccount as String: key,
-        ]
-        
-        var queryResult: AnyObject?
-        let status = withUnsafeMutablePointer(to: &queryResult) {
-            SecItemCopyMatching(query as CFDictionary, $0)
-        }
-        
-        switch status {
-        case errSecSuccess:
-            guard
-                let queriedItem = queryResult as? [String: Any],
-                let data = queriedItem[kSecValueData as String] as? Data else {
-                throw errorFor(KeystoreError.unknown("Malformed data"))
+        do {
+            let data = try keychain.getData(key)
+            guard let data = data else {
+                throw errorFor(KeystoreError.keyNotFound(key))
             }
-            
             return data
-        case errSecItemNotFound:
-            let keyStr = String(data: key, encoding: .utf8)
-            throw errorFor(KeystoreError.keyNotFound(keyStr))
-        default:
-            throw errorFor(KeystoreError.unknown(details(for: status)))
+        } catch {
+            throw errorFor(KeystoreError.unknown(error.localizedDescription))
         }
     }
     
-    @objc public func save(_ key: Data?, value: Data?) throws {
+    @objc public func save(_ key: String?, value: Data?) throws {
         guard let key = key else {
             throw errorFor(KeystoreError.keyNotFound())
         }
+        guard let value = value else {
+            throw errorFor(KeystoreError.unknown("Value cannot be empty"))
+        }
         
-        var query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: service,
-            kSecAttrAccount as String: key,
-        ]
-        
-        var status = SecItemCopyMatching(query as CFDictionary, nil)
-        switch status {
-        case errSecSuccess:
-            var attributesToUpdate: [String: Any] = [:]
-            attributesToUpdate[kSecValueData as String] = value
-            
-            status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
-            if status != errSecSuccess {
-                throw errorFor(KeystoreError.unknown(details(for: status)))
-            }
-        case errSecItemNotFound:
-            query[kSecValueData as String] = value
-            
-            status = SecItemAdd(query as CFDictionary, nil)
-            if status != errSecSuccess {
-                throw errorFor(KeystoreError.unknown(details(for: status)))
-            }
-        default:
-            throw errorFor(KeystoreError.unknown(details(for: status)))
+        do {
+            try keychain.set(value, key: key)
+        } catch {
+            throw errorFor(KeystoreError.unknown(error.localizedDescription))
         }
     }
     
     @objc(clear:) public func clear() throws {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: service,
-        ]
-        
-        let status = SecItemDelete(query as CFDictionary)
-        switch status {
-        case errSecSuccess:
-            return
-        case errSecItemNotFound:
-            return
-        default:
-            throw errorFor(KeystoreError.unknown(details(for: status)))
+        do {
+            try keychain.removeAll()
+        } catch {
+            throw errorFor(KeystoreError.unknown(error.localizedDescription))
         }
     }
     
-    @objc public func delete(_ key: Data?) throws {
+    @objc public func delete(_ key: String?) throws {
         guard let key = key else {
             throw errorFor(KeystoreError.keyNotFound())
         }
         
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: service,
-            kSecAttrAccount as String: key,
-        ]
-        
-        let status = SecItemDelete(query as CFDictionary)
-        switch status {
-        case errSecSuccess:
-            return
-        case errSecItemNotFound:
-            return
-        default:
-            throw errorFor(KeystoreError.unknown(details(for: status)))
+        do {
+            try keychain.remove(key)
+        } catch {
+            throw errorFor(KeystoreError.unknown(error.localizedDescription))
         }
     }
 }

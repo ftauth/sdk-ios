@@ -19,6 +19,8 @@
 		C02FE68A265050730031B659 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02FE689265050730031B659 /* ContentViewModel.swift */; };
 		C02FE68B265050730031B659 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02FE689265050730031B659 /* ContentViewModel.swift */; };
 		C02FE690265050BF0031B659 /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02FE68E265050A40031B659 /* ExampleUITests.swift */; };
+		C02FE693265051E90031B659 /* ftauth_config.json in Resources */ = {isa = PBXBuildFile; fileRef = C02FE692265051E90031B659 /* ftauth_config.json */; };
+		C02FE694265051E90031B659 /* ftauth_config.json in Resources */ = {isa = PBXBuildFile; fileRef = C02FE692265051E90031B659 /* ftauth_config.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,7 @@
 		C02FE63126503EE30031B659 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C02FE689265050730031B659 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		C02FE68E265050A40031B659 /* ExampleUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
+		C02FE692265051E90031B659 /* ftauth_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ftauth_config.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +109,7 @@
 		C02FE60826503EE20031B659 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C02FE692265051E90031B659 /* ftauth_config.json */,
 				C02FE60926503EE20031B659 /* ExampleApp.swift */,
 				C02FE60A26503EE20031B659 /* ContentView.swift */,
 				C02FE60B26503EE30031B659 /* Assets.xcassets */,
@@ -301,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C02FE63626503EE30031B659 /* Assets.xcassets in Resources */,
+				C02FE693265051E90031B659 /* ftauth_config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C02FE63726503EE30031B659 /* Assets.xcassets in Resources */,
+				C02FE694265051E90031B659 /* ftauth_config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

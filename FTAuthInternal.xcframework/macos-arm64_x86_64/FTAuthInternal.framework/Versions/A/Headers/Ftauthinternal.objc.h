@@ -46,9 +46,9 @@
 
 @protocol FtauthinternalKeyStore <NSObject>
 - (BOOL)clear:(NSError* _Nullable* _Nullable)error;
-- (BOOL)delete:(NSData* _Nullable)key error:(NSError* _Nullable* _Nullable)error;
-- (NSData* _Nullable)get:(NSData* _Nullable)key error:(NSError* _Nullable* _Nullable)error;
-- (BOOL)save:(NSData* _Nullable)key value:(NSData* _Nullable)value error:(NSError* _Nullable* _Nullable)error;
+- (BOOL)delete:(NSString* _Nullable)key error:(NSError* _Nullable* _Nullable)error;
+- (NSData* _Nullable)get:(NSString* _Nullable)key error:(NSError* _Nullable* _Nullable)error;
+- (BOOL)save:(NSString* _Nullable)key value:(NSData* _Nullable)value error:(NSError* _Nullable* _Nullable)error;
 @end
 
 @protocol FtauthinternalLogger <NSObject>
@@ -517,9 +517,9 @@ or reasonably protected against attacks.
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
 - (BOOL)clear:(NSError* _Nullable* _Nullable)error;
-- (BOOL)delete:(NSData* _Nullable)key error:(NSError* _Nullable* _Nullable)error;
-- (NSData* _Nullable)get:(NSData* _Nullable)key error:(NSError* _Nullable* _Nullable)error;
-- (BOOL)save:(NSData* _Nullable)key value:(NSData* _Nullable)value error:(NSError* _Nullable* _Nullable)error;
+- (BOOL)delete:(NSString* _Nullable)key error:(NSError* _Nullable* _Nullable)error;
+- (NSData* _Nullable)get:(NSString* _Nullable)key error:(NSError* _Nullable* _Nullable)error;
+- (BOOL)save:(NSString* _Nullable)key value:(NSData* _Nullable)value error:(NSError* _Nullable* _Nullable)error;
 @end
 
 /**

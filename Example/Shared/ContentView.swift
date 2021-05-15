@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel = ContentViewModel()
     
     var body: some View {
-        Text("Hello, world!")
+        if let user = viewModel.user {
+            Text("User: \(user)")
+        } else if let error = viewModel.error {
+            Text("Error: \(error.localizedDescription)")
+        } else {
+            Button("Login") {
+                viewModel.login()
+            }
             .padding()
+        }
     }
 }
 
