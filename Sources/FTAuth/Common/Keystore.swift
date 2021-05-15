@@ -26,15 +26,17 @@ public class Keystore: NSObject {
             throw errorFor(KeystoreError.keyNotFound())
         }
         
+        var data: Data?
         do {
-            let data = try keychain.getData(key)
-            guard let data = data else {
-                throw errorFor(KeystoreError.keyNotFound(key))
-            }
-            return data
+            data = try keychain.getData(key)
         } catch {
             throw errorFor(KeystoreError.unknown(error.localizedDescription))
         }
+        
+        guard let data = data else {
+            throw errorFor(KeystoreError.keyNotFound(key))
+        }
+        return data
     }
     
     @objc public func save(_ key: String?, value: Data?) throws {

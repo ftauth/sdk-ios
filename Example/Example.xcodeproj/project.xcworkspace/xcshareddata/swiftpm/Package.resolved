@@ -2,12 +2,21 @@
   "object": {
     "pins": [
       {
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
+        "state": {
+          "branch": null,
+          "revision": "84e546727d66f1adc5439debad16270d0fdd04e7",
+          "version": "4.2.2"
+        }
+      },
+      {
         "package": "FTAuth",
         "repositoryURL": "https://github.com/ftauth/sdk-ios.git",
         "state": {
           "branch": null,
-          "revision": "ba67f76b3df42ba2f117e49f6e28308d4f452abe",
-          "version": "0.0.3"
+          "revision": "64be2af4245458db5bb5605ebc70851a2da1cec8",
+          "version": "0.0.4"
         }
       }
     ]
