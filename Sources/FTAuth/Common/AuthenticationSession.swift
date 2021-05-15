@@ -93,6 +93,7 @@ extension AuthenticationSession: ASWebAuthenticationPresentationContextProviding
     }
 }
 
+#if os(iOS)
 @available(iOS, introduced: 11.0)
 @available(iOS, deprecated: 12.0)
 @available(macCatalyst, introduced: 13.0)
@@ -120,3 +121,4 @@ public class AuthenticationSessionCompat: NSObject, WebViewLauncher {
         }
     }
 }
+#endif

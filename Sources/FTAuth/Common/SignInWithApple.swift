@@ -10,6 +10,7 @@ import AuthenticationServices
 
 typealias SignInWithAppleCompletionHandler = (SignInWithAppleData?, Error?) -> Void
 
+@available(macOS 10.15, *)
 @available(iOS 13.0, *)
 class SignInWithApple: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     private var completion: SignInWithAppleCompletionHandler?

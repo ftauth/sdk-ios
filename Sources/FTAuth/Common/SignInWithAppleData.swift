@@ -26,6 +26,7 @@ class SignInWithAppleData: NSObject {
     let username: String?
     let password: String?
     
+    @available(macOS 10.15, *)
     @available(iOS 13.0, *)
     init(credential: ASAuthorizationAppleIDCredential) {
         self.credentialType = .appleID
@@ -43,6 +44,7 @@ class SignInWithAppleData: NSObject {
         super.init()
     }
     
+    @available(macOS 10.15, *)
     @available(iOS 12.0, *)
     init(credential: ASPasswordCredential) {
         self.credentialType = .password
