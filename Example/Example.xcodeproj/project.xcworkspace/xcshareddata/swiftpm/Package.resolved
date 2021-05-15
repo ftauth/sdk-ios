@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FTAuth",
+        "repositoryURL": "https://github.com/ftauth/sdk-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "ba67f76b3df42ba2f117e49f6e28308d4f452abe",
+          "version": "0.0.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
