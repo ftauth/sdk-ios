@@ -10,7 +10,7 @@ import FTAuth
 
 class TestKeystore: XCTestCase {
     private let keystore = Keystore()
-    private let key = "key".data(using: .utf8)!
+    private let key = "key"
     private let value = "value".data(using: .utf8)!
     
     override func setUpWithError() throws {
@@ -24,7 +24,7 @@ class TestKeystore: XCTestCase {
     }
     
     func testSave() throws {
-        let anotherKey = "another_key".data(using: .utf8)!
+        let anotherKey = "another_key"
         let anotherValue = "another_value".data(using: .utf8)!
         
         try keystore.save(key, value: value)
@@ -52,9 +52,9 @@ class TestKeystore: XCTestCase {
     }
     
     func testClear() throws {
-        let anotherKey = "another_key".data(using: .utf8)!
+        let anotherKey = "another_key"
         let anotherValue = "another_value".data(using: .utf8)!
-        let aThirdKey = "a_third_key".data(using: .utf8)!
+        let aThirdKey = "a_third_key"
         let aThirdValue = "a_third_value".data(using: .utf8)!
         
         try keystore.save(key, value: value)
