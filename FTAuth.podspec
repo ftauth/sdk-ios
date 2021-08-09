@@ -23,6 +23,7 @@ Client-side library for the FTAuth server. Handles authentication and HTTP reque
   s.platform = :ios
   s.ios.deployment_target = '11.0'
   s.swift_versions = ['5.0', '5.1', '5.2', '5.3']
+  s.dependency 'KeychainAccess'
 
   s.subspec 'Common' do |cs|
     cs.source_files = 'Sources/FTAuth/Common/**/*'
@@ -30,7 +31,7 @@ Client-side library for the FTAuth server. Handles authentication and HTTP reque
 
   s.subspec 'Full' do |fs|
     fs.source_files = 'Sources/FTAuth/**/*'
-    fs.vendored_frameworks = 'FTAuthInternal.xcframework'
+    fs.vendored_frameworks = 'FTAuthInternal.framework'
   end
 
   s.test_spec 'Tests' do |test_spec|
