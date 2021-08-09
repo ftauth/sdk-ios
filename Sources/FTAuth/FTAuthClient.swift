@@ -112,6 +112,18 @@ public class FTAuthClient: NSObject {
         certRepo.setDefaultConfiguration(sc)
     }
     
+    public func currentCredentials() -> (String?, String?) {
+        var accessToken: String?
+        var refreshToken: String?
+        if let data = try? keystore.get("access_token") {
+            accessToken = String(data: data, encoding: .utf8)
+        }
+        if let data = try? keystore.get("refresh_token") {
+            refreshToken = String(data: data, encoding: .utf8)
+        }
+        return (accessToken, refreshToken)
+    }
+    
     @objc public func logout() {
         guard isInitialized else {
             return
